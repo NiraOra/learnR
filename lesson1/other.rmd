@@ -1,0 +1,69 @@
+---
+title: "Functions + more"
+output: html_notebook # output could be whatever
+---
+
+```{r message=FALSE, warning=FALSE}
+# load libraries
+library(readr)
+library(dplyr)
+```
+
+```{r}
+# load data frame
+# this is where the data is taken from
+# csv: comma seperated value
+# for example: this takes the data from cupcake.csv and puts it in tabular form (each value is seperated by a comma; first row is bold)
+cake <- read_csv('cupcake.csv')
+# can also do write_csv (to write in a csv file)
+# takes in 2 args: df (data frame project), file_name
+# write_csv(df, 'nira.csv') for example
+# say we loaded from a file called 'artists.csv'
+artists <- read_csv('artists.csv')
+```
+
+```{r}
+# displays data
+cake
+### functions
+# 1. head(cake): returns first 6 rows of the data frame; or head(df, 8) to specify a return of first 8 rows from the data frame
+# 2. summary(cake): mean, median, minimum, maximum of the data frame
+
+# pipe
+# df %>%
+#    head(___)
+# connects to become head(df) [essentially connecting]
+# example: cake %>% head(): head(cake)
+
+# to select a particular column; can use select(df, column_name)
+artist_groups <- select(artists, group)
+artist_groups
+# can also use pipeline like artists %>%
+#                               select(group)
+# multiple groups: can do select(df, [column names]) or a pipeline thing
+group_info <- artists %>%
+                select(group, spotify_monthly_listeners, year_founded)
+group_info
+# to remove the cols, just put a - first
+df_cols_removed <- artists %>%
+                      select(-genre, -spotify_monthly_listeners, -year_founded)
+
+# can also filter
+rock_groups <- filter(artists, genre == 'Rock')
+rock_groups
+# multiple
+popular_rock_groups <- artists %>%
+                        filter(genre == 'Rock', spotify_monthly_listeners > 20000000)
+popular_rock_groups
+# can filter using logic (ie genre == 'Rock' | spotify_monthly_listeners > 20000000) or filter(!(change == 'space'))
+korea_or_before_2000 <- artists %>%
+                          filter(country == 'South Korea' | year_founded < 2000)
+korea_or_before_2000
+
+# descending
+youtube_desc <- artists %>%
+                  arrange(desc(youtube_subscribers))
+# ascending
+youtube_asc <- artists %>%
+                  arrange(youtube_subscribers)
+```

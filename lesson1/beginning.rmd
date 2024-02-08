@@ -1,0 +1,39 @@
+---
+title: "Introduction to R Syntax"
+output: html_notebook
+---
+```{r}
+# calculate 25 * 4 + 9 / 3 to equal 103
+25 * 4 + 9 / 3
+# to make a vector named phone with 3 numbers in it
+phone <- c(022, 234, 457)
+# a conditional: setting message to something; then changing the value inside the message based on the conditional
+# for example, if the message is TRUE, then it changes to desired, otherwise it changes to other
+# then we print the message
+# since TRUE is TRUE then it prints "I execute this when true!"
+message <- "I change based on a condition."
+if (TRUE) {
+  message <- "I execute this when true!"
+} else {
+  message <- "I execute this when false!"
+}
+print(message)
+
+# conditionals
+# operations: <, >, >=, ==, <=, !=
+56 >= 129 # evaluates to false
+
+# logic: AND (&), OR(|), NOT(!)
+# changes message based on condition
+message <- 'Should I pack an umbrella?'
+weather <- 'cloudy'
+high_chance_of_rain <- TRUE
+
+if (weather == 'cloudy' & high_chance_of_rain) {
+  message <- "Pack umbrella!"
+} else {
+  message <- "No need for umbrella!"
+}
+print(message)
+
+```

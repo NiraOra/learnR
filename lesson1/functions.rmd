@@ -1,0 +1,44 @@
+---
+title: "Functions + more"
+output: html_notebook # output could be whatever
+---
+```{r}
+# load libraries
+# loading the two libraries
+library(readr)
+library(dplyr)
+```
+```{r}
+# load data frame
+artists <- read_csv('artists.csv')
+```
+```{r}
+# inspect data frame
+artists
+head(artists)
+summary(artists)
+```
+```{r}
+artists %>%
+  select(-country,-year_founded,-albums) %>%
+  filter(spotify_monthly_listeners > 20000000, genre != 'Hip Hop') %>%
+  arrange(desc(youtube_subscribers))
+```
+```{r}
+# takes data (vector with values)
+# runs it through unique function (returns unique values from the data)
+# stores it in unique_vals; then print out the unique_vals (a vector of unique values)
+data <- c(120,22,22,31,15,120)
+unique_vals <- unique(data)
+print(unique_vals)
+# other functions: sort(c(...)), length(c(...)), sum(...)
+# find square root of 49
+solution <- sqrt(49)
+print(solution)
+# other stuff
+round_down <- floor(3.14)
+round_up <- ceiling(3.14)
+print(round_up)
+print(round_down)
+# packages for R: in https://cran.r-project.org
+```

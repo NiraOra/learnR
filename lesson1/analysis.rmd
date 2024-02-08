@@ -1,0 +1,41 @@
+---
+title: "Analysis + more"
+output: html_notebook # output could be whatever
+---
+
+```{r message=FALSE, warning=FALSE}
+# load libraries
+library(readr)
+library(dplyr)
+library(tidyr)
+# load data
+dogs <- read_csv('dogs.csv')
+```
+
+```{r}
+# to find out the list of csv files in the particular folder of your liking (follows the pattern of ...)
+files <- list.files(pattern = "file_.*csv")
+# lapply() reads the data from "files" variable and saves it
+df_list <- lapply(files,read_csv)
+# this one binds all the rows of the df_list
+df <- bind_rows(df_list)
+# find out number of rows in the dataframe
+smth <- nrow(df)
+# tidyr: for gathering data in ways you want to
+# key: the new column name, the previous 2 are the columns to gather; the value is whatever was stored in fractions and probability
+# ie: exam column holds either the name fractions or probability and score corresponds to the fraction/probability
+students <- students %>%
+          gather('fractions', 'probability', key='exam', value='score')
+# dplyr: counts number of unique values in a column of a data frame
+exam_counts <- students %>% count(exam)
+# forms a vector of duplicated items in a dataframe; like example: FALSE FALSE TRUE FALSE FALSE
+duplicates <- students %>% duplicated()
+# gives number of duplicated rows (the "table" bit)
+duplicate_counts <- students %>% duplicated() %>% table()
+# keeps only distinct rows
+unique_students <- students %>% distinct()
+# substring seperation and making a new column (gender_age, (number))
+# for example, if we need to seperate from M14 and take away M for gender, then we do str_sub(gender_age, 1, 1)
+students <- students %>% mutate(gender = str_sub(gender_age,1,1))
+students <- students %>% mutate(age = str_sub(gender_age,2,3))
+```
