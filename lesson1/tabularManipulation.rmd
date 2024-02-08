@@ -13,6 +13,7 @@ dogs <- read_csv('dogs.csv')
 
 ```{r}
 # add average height column
+# just another
 dogs <- dogs %>%
   mutate(avg_height = (height_low_inches + height_high_inches) / 2)
 # adding more:
